@@ -1,1095 +1,543 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+Ë
+
+Ë‚
+Fuel Economy Guide Database files.
 
-	<meta charset="ISO-8859-1">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="fuel economy data, fuel economy guide, MPG, gas mileage, EPA, DOE, mileage guide, mileage, cars, trucks">
-    <meta name="description" content="Fuel economy Fuel Economy Datafiles (1978-present), Fuel Economy Guides (1996-present)">
-	
-	<title>Download Fuel Economy Data</title>
-	
-	<!-- Core CSS files for fueleconomy.gov -->
+The ZIP'd versions of these files are named ??DATA.ZIP (e.g., 83DATA.ZIP)
+for 1978-1983 database files, ??MFGUI.ZIP (e.g., 93MFGUI.ZIP) for
+1984-1997 and  ??GUIDE.ZIP for 1998 and later model year database files.
 
-<!-- CSS for Bootstrap -->
-<link rel="stylesheet" href="/feg/assets/bs3/dist/css/bootstrap.min.css">
+Following are notes about the files included in the ZIP's,
+then definitions of abbreviations that are used in the reports, and
+then detailed database format information for the four different
+formats that are used, depending on model year.
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+This information is provided by the U.S. Environmental Protection Agency,
+Office of Mobile Sources, National Vehicle and Fuel Emissions Laboratory,
+2000 Traverwood, Ann Arbor, MI 48105 (734-214-4200).
 
-<!-- CSS for FEG-specific content -->
-<link rel="stylesheet" type="text/css" href="/feg/assets/css/feg.css">
+      ===================================================
 
-<!--[if IE 8 ]> <html class="ie8"> <![endif]-->
+Up to the 1985 model year, fuel economy guides were generated
+separately for 49-state and California. 
 
-<link rel="apple-touch-icon" href="/apple-touch-icon-144x144.png"/>
-<link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-144x144.png"/>
+For model year 1983 and earlier model years, files named ??FG.DAT contain models
+for 49-state and ??CG.DAT contain those for California.
 
-	
-	<style type="text/css">
-		table.std-table {width: 100%; max-width: 700px}
-		.std-table td, .std-table th {border: 1px solid #ccc}
-		.warning {color:#cc0000;}
-	</style>
+For model years 1984 and 1985, models for both of the sales areas
+are included in the file ??MFGUI.DAT and the sales area of a
+particular model is identified in the field named 'STATE CODE'.
 
-</head>
+For model years 1998 and later, both comma-delimited (??GUIDE6.CSV)
+and Excel spreadsheet (??GUIDE6.XLS) format files are included. 
+For 2000 and later, additional files ??GD_ALT.CSV and ??GD_ALT.XLS 
+are included for alternative fueled vehicles.
+ 
+For model year 1997 and earlier, interior volumes for available body styles (2-dr, 4-dr and
+hatchback) or vehicle class name (compact car, mid-size car, etc)
+for a model type in the files ??CG.DAT or ??FG.DAT can be retrieved
+from ??CARLN.DAT by relating the 5-digit carline code and the 2-
+digit class code in the files.
 
-<body>
 
-	<!-- Header and Top Navigation -->
-<!-- Uses Bootstrap-based Mega Menu -->
+      ===================================================
 
-<!-- Skip navigation for accessbility -->
-<div class="skipnav"><a href="#main-content">Skip to main content</a></div>
-	
-	
-<!-- Main Site Header -->	
 
-<header>
-	<div class="sponsor">
-	<!--Sponsor row-->
-		<div class="container">
-			<div class="row hidden-xs" id="sponsor-head" style="margin-bottom: 4px; margin-top: 7px">
-				<div class="col-sm-12">
-					<a href="https://www.eere.energy.gov" target="_parent" class="pull-left"><img src="/feg/images/home/eere_logo_horiz_gray.png" alt="U.S. Department of Energy - Energy Efficiency and Renewable Energy" style="max-height: 24px"></a>
-					<a href="https://www.epa.gov/otaq/" target="_parent" class="pull-right"><img src="/feg/images/home/epa_logo_gray.png" alt="U.S. Environmental Protection Agency - Office of Transportation and Air Quality" style="max-height: 24px"></a>
-				</div>
-			</div><!-- End of Sponsor row -->
-		</div>
-	</div>
-	
-	<!-- Logo & mini menu -->
-	<div class="logo-row hidden-xs">
-		<div class="container">
-			<div class="row hidden-xs" id="hd">
-			
-				<div id="feg-logo" class="col-sm-6">
-					<a href="https://www.fueleconomy.gov" target="_parent" style="text-decoration: none;"><img class="img-responsive" style="text-decoration: none;" src="/feg/images/home/fe-logo-bs.png" alt="www.fueleconomy.gov - the official government source for fuel economy information"></a>
-				</div>
+DEFINITION OF REPORT ABBREVIATIONS
+ŒAn explanation of abbreviations used in the Fuel Economy Guide 
+and Test Car List reports published by EPA follows:
 
-				<!-- Mini Menu -->
-				<div id="mini-menu" class="col-sm-6 hidden-xs">
-					<nav>
-						<ul class="inline text-right">
-							<li><a href="https://fueleconomy.gov/m">Mobile</a></li>
-							<li><a href="https://www.fueleconomy.gov/feg/esIndex.shtml">Espa&ntilde;ol</a></li>
-							<li><a href="https://www.fueleconomy.gov/feg/sitemap.shtml">Site Map</a></li>
-							<li><a href="https://www.fueleconomy.gov/feg/links.shtml"><span class="sr-only">General </span>Links</a></li>
-							<li><a href="https://www.fueleconomy.gov/feg/info.shtml">FAQ</a></li>
-							<li><a href="https://www.fueleconomy.gov/feg/motorweek.jsp">Videos</a></li>
-						</ul>
-					</nav>
-				</div><!-- end of #mini-menu -->
-			  
-			</div><!-- End of .row #hd -->  
-		</div>
-	</div><!-- End of Logo & mini menu -->  
-	
-</header>	
 
-<!-- Mega Menu -->
-<nav>
-<div class="main-nav navbar navbar-default" role="navigation">
- <div class="container nav-container">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header">
-	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-	  <span class="sr-only">Toggle navigation</span>
-	  <span class="icon-bar"></span>
-	  <span class="icon-bar"></span>
-	  <span class="icon-bar"></span>
-	</button>
-	<a class="navbar-brand visible-xs" href="index.shtml"><img class="img-responsive" src="/feg/images/home/fe-brand-1a558f.png" alt="www.fueleconomy.gov - the official government source for fuel economy information"></a>
-  </div>
+Car Line Name and Vehicle ID (Guide and Test Car List)
 
-  <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse navbar-ex1-collapse">
-	<ul class="nav navbar-nav">
-	
-	  <!-- Find a Car Dropdown -->
-	  <li class="dropdown">
-		<a href="https://www.fueleconomy.gov/feg/findacar.shtml" class="dropdown-toggle" data-toggle="dropdown">Find a Car</a>
-		<ul id="searches" class="dropdown-menu row">
-			<li class="col-sm-4">
-			  <ul class="submenu">
-				<li class="header hidden-xs">Searches</li>
-				<li><a href="https://www.fueleconomy.gov/feg/findacar.shtml">Find a Car &ndash; Home</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/Find.do?action=sbsSelect">Compare Side by Side</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/powerSearch.jsp">Power Search</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/make.shtml">Search by Make</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/alternatives.shtml">Hybrids, Diesels, and Alternative Fuel Cars</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/SmartWay.do">Find a SmartWay Vehicle</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/best-worst.shtml">Best and Worst Vehicles</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/topten.jsp">Fueleconomy.gov Top Ten</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/mostViewed.shtml">Today's Most Viewed Vehicles</a></li>
-				<li class="visible-xs"><a href="https://www.fueleconomy.gov/feg/UsedCarLabel.jsp">Used Car Label</a></li>
-			  </ul>
-			  <ul class="submenu">
-				<li class="header hidden-xs">Fuel Economy Guides</li>
-				<li><a href="https://www.fueleconomy.gov/feg/printGuides.shtml">Print the Guide</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/guides.shtml">Help Promote Fuel Economy</a></li>
-			  </ul>
-			</li>
-			<li class="col-sm-4 hidden-xs">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/findacar.shtml">Find a Car &ndash; Home</a></li>
-				<li class="hidden-xs">
-					<div class="img-caption" style="width: 15.385em; height: 14.23em; *width: 15em; *height: 13.875em;">
-						<a href="https://www.fueleconomy.gov/feg/findacar.shtml">
-							<img src="/feg/images/topnav/findacar2_mm.jpg" alt="Photo: Couple shopping for car">
-							<div class="mmcap">Find a fuel efficient vehicle that meets your needs</div>
-						</a>
-					</div>
-				</li>
-			  </ul>
-			</li>
-			<li class="col-sm-4 hidden-xs">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/UsedCarLabel.jsp">Used Car Label</a>
-				<li class="hidden-xs">
-					<div class="img-caption" style="width: 15.385em; height: 14.23em; *width: 15em; *height: 13.875em;">
-						<a href="https://www.fueleconomy.gov/feg/UsedCarLabel.jsp">
-							<img src="/feg/images/topnav/used-label-med.png" alt="Used Car Label">
-							<div class="mmcap">Selling your car? We can help you advertise its mpg.</div>
-						</a>
-					</div>
-				</li>
-			  </ul>
-			</li>
-		</ul>
-	  </li>
-	  <!-- end of Find a Car dropdown -->
-	  
-	  <!-- Find a Save Money and Fuel dropdown -->
-	  <li class="dropdown">
-		<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Save Money & Fuel</a>
-		<ul id="save" class="dropdown-menu row">
-			<li class="col-sm-4">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/drive.shtml">Gas Mileage Tips</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/driveHabits.jsp">Driving More Efficiently</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/maintain.jsp">Keeping Your Car in Shape</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/planning.shtml">Planning and Combining Trips</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/choosing.jsp">Choosing a More Efficient Vehicle</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/evtips.shtml">Tips for Hybrids, Plug-in Hybrids, and Electric Vehicles</a></li>		
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/coldweather.shtml">Fuel Economy in Cold Weather</a></li>	
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/hotweather.shtml">Fuel Economy in Hot Weather</a></li>	
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/moinfo.shtml">More Information</a></li>
-			  </ul>
-			</li>
-			<li class="col-sm-4">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/taxcenter.shtml">Tax Incentives</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/taxevb.shtml">All-Electric and Plug-in Hybrid Vehicles</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/taxfaqs.shtml">Frequently Asked Questions</a></li>
-			 </ul>
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/gasprices/index.shtml">Gasoline Prices</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/gasprices/states/index.shtml">Local Prices</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/gasprices/faq.shtml">Questions About Gas Prices</a></li>
-			  </ul>
-			</li>
-			<li class="col-sm-4">
-			  <ul class="submenu">
-				<li class="header hidden-xs">Cost Calculators</li>
-				<li><a href="https://www.fueleconomy.gov/feg/savemoney.jsp">Fuel Savings Calculator</a></li>
-				<li><a href="https://www.fueleconomy.gov/trip/">Trip Calculator</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/hybridCompare.jsp">Can a Hybrid Save Me Money?</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/Find.do?action=phev1Prompt">My Plug-in Hybrid Calculator</a></li>
-			  </ul>
-			</li>
-		</ul>
-	  </li>
-	  <!-- end of Save Money and Fuel dropdown -->
-	  
-	  <!-- Benefits Dropdown -->
-	  <li class="dropdown">
-		<a href="https://www.fueleconomy.gov/feg/why.shtml" class="dropdown-toggle" data-toggle="dropdown">Benefits</a>
-		<ul id="benefits" class="dropdown-menu row">
-			<li class="col-sm-5">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/why.shtml">Why is fuel economy important?</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/savemoney.jsp">Save Money</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/climate.shtml">Climate Change</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/oildep.shtml">Oil Dependence Costs</a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/consres.shtml">Sustainability</a></li>
-			  </ul>
-			</li>
-			<li class="col-sm-7 hidden-xs">
-			  <ul class="submenu">
-				<li class="header">
-					<div class="img-caption" style="width: 19.23em; *width: 18.75em">
-						<a href="https://www.fueleconomy.gov/feg/climate.shtml">
-							<img class="img-responsive" src="/feg/images/topnav/HouseholdCO2Pie_mm.jpg" alt="Pie chart showing that vehicles account for about 51% of a household's carbon footprint.">
-							<div class="mmcap">Vehicles produce about half of the greenhouse gases from a typical U.S. household.</div>
-						</a>
-					</div>
-				</li>
-			  </ul>
-			</li>
-		</ul>
-	  </li>
-	  <!-- end of Benefits dropdown -->		
+    These are manufacturer-determined descriptors.
 
-	  <!-- My MPG Dropdown -->
-	  <li class="dropdown">
-		<a href="https://www.fueleconomy.gov/mpg/MPG.do" class="dropdown-toggle" data-toggle="dropdown">My MPG</a>
-		<ul id="mympg" class="dropdown-menu row">
-			<li class="col-sm-6">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/mpg/MPG.do">My MPG - Home</a></li>
-				<li class="hidden-xs">
-					<div class="img-caption" style="width: 15.385em;  height: 16.385em; *width: 15em; *height: 15.975em;">
-						<a href="https://www.fueleconomy.gov/mpg/MPG.do">
-							<img class="img-responsive" src="/feg/images/topnav/fuel_pump_mm.jpg" alt="Woman at fuel pump">
-							<div class="mmcap">We can help you calculate and track your fuel economy.</div>
-						</a>
-					</div>
-				</li>
-			  </ul>
-			</li>
-			<li class="col-sm-6">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/mpg/MPG.do?action=browseList">MPG Estimates from Others</a></li>
-				<li class="hidden-xs">
-					<div class="img-caption" style="width: 19.23em;  height: 16.385em; *width: 18.75em; *height: 15.975em;">
-						<a href="https://www.fueleconomy.gov/mpg/MPG.do?action=browseList">
-							<img class="img-responsive" src="/feg/images/topnav/realworldmpg_mm.jpg" alt="Example chart showing real-world MPG">
-							<div class="mmcap">MPG estimates from drivers like you!</div>
-						</a>
-					</div>
-				</li>
-			  </ul>
-			</li>
-		</ul>
-	  </li>
-	  <!-- end of My MPG dropdown -->	
+         * Test type 31 data = fuel economy data
+         # Test type 32 data = analytical data
 
-	  <!-- Advanced Vehicles and Fuels dropdown -->
-	  <li class="dropdown">
-		<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Advanced Cars &amp; Fuels</a>
-		<ul id="advanced-vehicles" class="dropdown-menu row">
-			<li class="col-sm-3">
-			  <ul class="submenu">
-				<li class="header"><a href="/feg/evsplash.shtml">About Hybrid and Electric Cars</a></li>
-				<li class="hidden-xs">
-					<a href="/feg/evsplash.shtml">
-						<img class="thumbnail img-responsive" src="/feg/images/icon_plugin.gif" style="width: 80px" alt="Icon showing electrical plug-in and gas pump">
-						<small>A quick guide to the different kinds of hybrids and electric vehicles.</small>
-					</a>
-				</li>
-				
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/hybridtech.shtml">Hybrids</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/hybrids.jsp">Compare Side by Side</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/hybridtech.shtml">How Hybrids Work</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/hybridCompare.jsp">Can a Hybrid Can Save Me Money?</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/hybrid_news.shtml">New &amp; Upcoming</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/hybrid_links.shtml">Hybrid Links</a></li>
-			  </ul>
-			</li>
-			
-			<li class="col-sm-3">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/evsbs.shtml">All-Electric Vehicles</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/evsbs.shtml">Compare Side by Side</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/evtech.shtml">About Electrics</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/evnews.shtml">New &amp; Upcoming</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/taxevb.shtml">Tax Incentives</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/evlinks.shtml">Electric Vehicle Links</a></li>
-				
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/phevsbs.shtml">Plug-In Hybrids</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/phevsbs.shtml">Compare Side by Side</a></li>               
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/phevtech.shtml">About Plug-in Hybrids</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/phevanim.shtml">How Plug-in Hybrids Save Money <span class="glyphicon glyphicon-facetime-video"></span></a></li>
-				<li><a href="https://www.fueleconomy.gov/feg/Find.do?action=phev1Prompt">My Plug-in Hybrid Calculator</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/phevnews.shtml">New &amp; Upcoming</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/taxevb.shtml">Tax Incentives</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/phevlinks.shtml">Plug-in Hybrid Links</a></li>
-			  </ul>
-			</li>
-			
-			<li class="col-sm-3">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/di_diesels.shtml">Diesels</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/diesels.jsp">Compare Side by Side</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/di_diesels.shtml">About Diesels</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/dieselnews.shtml">New &amp; Upcoming</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/lowsulfurdiesel.shtml">Ultra-Low Sulfur Diesel</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/biodiesel.shtml">Biodiesel</a></li> 
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/diesellinks.shtml">Diesel Links</a></li>
-					
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/flextech.shtml">Flex-Fuel Vehicles</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/flextech.shtml">Flex-Fuel Vehicles</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/flexlinks.shtml">Flex-Fuel Links</a></li>
-			  </ul>
-			</li>
-			
-			<li class="col-sm-3">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/current.shtml">Alternative Fuels</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/ethanol.shtml">Ethanol</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/electricity.shtml">Electricity</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/biodiesel.shtml">Biodiesel</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/bifueltech.shtml">Natural Gas</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/hydrogen.shtml">Hydrogen</a></li> 
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/lpg.shtml">Propane</a></li>
-				
-				
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/fuelcell.shtml">Fuel Cell Vehicles</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/fcv_sbs.shtml">Compare Side by Side</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/fcv_PEM.shtml">How They Work</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/fcv_benefits.shtml">Benefits and Challenges</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/fcv_whatsnew.jsp">Videos </a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/fcv_links.shtml">Fuel Cell Links</a></li>
-			  </ul>
-			</li>
-		</ul>
-	  </li>
-	  <!-- end of Advanced Vehicles and Fuels dropdown -->
-	  
-	  <!-- About EPA Ratings dropdown -->
-	  <li class="dropdown">
-		<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">About EPA Ratings</a>
-		<ul id="epa-ratings" class="dropdown-menu row">
-		
-			<li class="col-sm-4">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/label/">New Window Sticker</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/label/">About the New Label</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/Find.do?action=bt2">Beyond Tailpipe Emissions</a></li>
-				<li class="hidden-xs"><span style="font-size: 90%">Sample Labels:</span>
-					<ul style="margin-left: 2px; padding: 0 0 0 20px; font-size: 90%">
-						<li><a href="https://www.fueleconomy.gov/feg/label/learn-more-gasoline-label.shtml">Gasoline Vehicles</a></li>
-						<li><a href="https://www.fueleconomy.gov/feg/label/learn-more-PHEV-label.shtml">Plug-in Hybrid Vehicles</a></li>
-						<li><a href="https://www.fueleconomy.gov/feg/label/learn-more-electric-label.shtml">Electric Vehicles</a></li>
-					</ul>
-				</li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/label/video.shtml">QR Codes</a></li>      
-			  </ul>
-			</li>
-			
-			<li class="col-sm-4">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/ratings.shtml">New vs. Old Ratings</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/ratings.shtml">2017 Ratings Changes</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/comparempg.shtml">Compare Old and New MPG</a></li>
-			
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/how_tested.shtml">Fuel Economy Tests</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/how_tested.shtml">How Vehicles Are Tested</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/which_tested.shtml">Which Vehicles Are Tested</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/fe_test_schedules.shtml">Detailed Test Information</a></li>
-			  </ul>
-			</li>
-			
-			<li class="col-sm-4">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/why_differ.shtml">Your Mileage Will Vary</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/why_differ.shtml">Your Mileage Will Vary</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/factors.shtml">Factors That Affect MPG</a></li>
-			  </ul>
-			</li>
-			
-		</ul>
-	  </li>
-	  <!-- end of About EPA Ratings dropdown -->
+Engine Description (Guide and Test Car List)
 
-	  <!-- My MPG Dropdown -->
-	  <li class="dropdown">
-		<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">More<span class="sr-only"> Topics</span></a>
-		<ul id="more" class="dropdown-menu row">
-		
-			<li class="col-sm-6">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/atv.shtml">Where the Energy Goes</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/atv.shtml">Gasoline Vehicles</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/atv-hev.shtml">Hybrids</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/atv-ev.shtml">Electric Cars</a></li>
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/tech_adv.shtml">Fuel-Saving Technologies</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/tech_engine_more.shtml">Engine Technologies</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/tech_transmission.shtml">Transmission Technologies</a></li>
-				<li class="hidden-xs"><a href="https://www.fueleconomy.gov/feg/tech-other.shtml">Other Technologies</a></li>
-			  </ul>
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/extremeMPG.jsp">Extreme MPG</a></li>
-			  </ul>
-			</li>
-			
-			<li class="col-sm-6">
-			  <ul class="submenu">
-				<li class="header"><a href="https://www.fueleconomy.gov/feg/octane.shtml">Selecting the Right Octane Fuel</a></li>
-				<li class="header hidden-xs">
-					<div class="img-caption" style="width: 17.5em">
-						<a href="https://www.fueleconomy.gov/feg/octane.shtml">
-							<img class="img-responsive" src="/feg/images/octane.jpg" alt="">
-							<div class="mmcap">Answers to frequently asked questions about octane.</div>
-						</a>
-					</div>
-				</li>
-			  </ul>
-			</li>
-			
-		</ul>
-	  </li>
-	  <!-- end of My MPG dropdown -->
-	  
-	  <!-- start of Search dropdown -->
-	  <li id="searchDdParent" class="dropdown">
-		<a id="search-link-menu" href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" style="padding-top: 8px; padding-bottom: 8px"><div id="search-icon" class="search-icon-topnav hidden-xs" style="margin-left: 5px; margin-right: 5px"></div><div class="visible-xs">Search</div></a>
-		<ul id="search" class="dropdown-menu row">
-			<li class="col-sm-12" style="padding-top: 1em">
-				<form class="form-inline" method="get" action="/feg/search.shtml">
-					<div class="form-group">
-						<label for="search-text" class="sr-only">Enter vehicle or phrase.</label>
-						<input id="search-text" name="words" class="form-control input-sm" type="text" placeholder="Enter vehicle or phrase">
-					</div>
-					<button id="go-search" class="btn btn-primary btn-sm" type="submit">Go</button>
-				</form>
-			</li>
-		</ul>
-	  
-	</ul><!-- end of .nav .navbar-nav -->
+    (GUZZLER)              -- Gas Guzzler
+    (POLICE)               -- Police vehicle
+    (MPFI), (MPI*)         -- Multipoint fuel injection
+    (SPFI)                 -- Single-point fuel injection
+    (FFS)                  -- Feedback fuel system
+    (TURBO), (TRBO), (TC*) -- Turbocharger
+    (S-CHARGE), (SC*)      -- Supercharger
+    (DIESEL), (DSL)        -- Diesel
+    (ROTARY)               -- Rotary engine
+    (VARIABLE)             -- Variable displacement engine
+    (NO-CAT)               -- No catalytic converter
+    (OHC)                  -- Overhead camshaft
+    (OHV)                  -- Overhead valves
+    (16-VALVE)             -- 16-valves
+    (305)                  -- 305 cubic inch displacement
+    (307)                  -- 307 cubic inch displacement
+    (M-ENG)                -- One of two 5.8L Ford truck engines
+    (W-ENG)                -- One of two 5.8L Ford truck engines
+    (GM-BUICK)             -- Engine produced by GM-Buick Motor Division
+    (GM-CHEV)              -- Engine produced by GM-Chevrolet Motor Division
+    (GM-OLDS)              -- Engine produced by GM-Oldsmobile Motor Division
+    (GM-PONT)              -- Engine produced by GM-Pontiac Motor Division
 
-  </div><!-- /.navbar-collapse -->
- </div>
- </div><!-- End of #main-nav -->
-</nav>
-	
-	<div class="container" id="main-container">
-		<div class="row">
+Any other descriptors not listed here are those submitted by manufacturers to
+augment engine information and may not always be self-explanatory.
 
-			<div class="col-sm-12" id="main-content">	
+Transmission Descriptors  (Guide and Test Car List)
 
-				<a id="content"></a><a id="top"></a>
-				
-				<h1>Download Fuel Economy Data</h1>
-                
-                <p>Fuel economy data are the result of vehicle testing done at the Environmental Protection Agency's National Vehicle and Fuel Emissions Laboratory in Ann Arbor, Michigan, and by vehicle manufacturers with oversight by EPA.</p>
-				<div class="well">
-				<p class="warning"><img src="/feg/images/findacar/info.gif" alt="" width="16" height="16" /> EPA has issued a <a href="https://www.epa.gov/fca">Notice of Violation</a> to Fiat Chrysler Automobiles N.V. and FCA US LLC for Model Year 2014-2016 light-duty diesel 
-				vehicles (Ram 1500 and Jeep Grand Cherokee). All relevant data from the affected vehicles has been removed from this website until further information is available. </p> 
-				</div>
+    First Character --               OD  (Overdrive Code)
+         M -- Manual                      1 -- No gear ratio < 1.0
+         A -- Automatic                   2 -- High gear ratio < 1.0
+         L -- Lockup/automaticŒ         S -- Semiautomatic
 
-				<h2>Attention! Revised Estimates</h2>
-                <p><a href="https://www.epa.gov/recalls/fuel-economy-label-updates#bmw">EPA Revises MPG Estimates for 2014 MINI Cooper and Cooper S</a></p>
-                <p><a href="https://www.epa.gov/recalls/fuel-economy-label-updates#mercedes">EPA Revises MPG Estimates for 2013&ndash;14 Mercedes C300 4matic</a></p>
-                <p><a href="https://www.epa.gov/recalls/fuel-economy-label-updates#ford">EPA Revises MPG Estimates for 2013&ndash;14 Ford Vehicles</a></p>
-                <p><a href="https://www.epa.gov/recalls/fuel-economy-label-updates#hyundai">2012&ndash;13 Hyundai Data Revised (November 2, 2012)</a></p>
-                <p><a href="https://www.epa.gov/recalls/fuel-economy-label-updates#kia">2012&ndash;13 Kia Data Revised (November 2, 2012)</a></p>
-				
-				<h2>Datasets for All Model Years (1984&ndash;2020)</h2>
-				<p>(Updated: Thursday March 28 2019)</p>
-				<p class="warning"><img src="/feg/images/findacar/info.gif" alt="" width="16" height="16" /> In order to make estimates comparable across model years, the MPG estimates for all 1984-2007 model year vehicles and some 2011-2016 model year vehicles have been revised.<a href="/feg/ratings.shtml"> Learn More</a></p> 
-				<p><a href="/ws/">Fueleconomy.gov Web Services for Developers</a></p> 
-                <p><a href="/feg/epadata/vehicles.csv.zip">Zipped CSV File</a> (<a href="/feg/ws/index.shtml#vehicle">Documentation</a>)</p>
-                <p><a href="/feg/epadata/vehicles.xml.zip">Zipped XML File</a> (<a href="/feg/ws/index.shtml#vehicle">Documentation</a>)</p>
-				
-				<h2>Datasets and Guides for Individual Model Years</h2>
-				<p class="warning"><img src="/feg/images/findacar/info.gif" alt="" width="16" height="16" /> The MPG estimates in the files below reflect the original estimates shown on the EPA fuel Economy Label</p> 
-				
-				<table class="std-table">
-                    <caption>Downloadable Fuel Economy Data</caption>
-					<col style="width: 16%">
-					<col style="width: 16%">
-					<col style="width: 16%">
-					<col style="width: 16%">
-					<col style="width: 16%">
-					<col style="width: 16%">
-                    <tr class="table-header-first"> 
-                        <th colspan="2">Fuel Economy Guide</th>
-                        <th colspan="2">EPA Green Vehicle Guide</th>
-						<th colspan="2">SmartWay Vehicle List</th>
-                    </tr>
-                    <tr class="table-header-first"> 
-						<th>Datafile<sup>1</sup></th>
-						<th>Printed Guide<sup>2</sup></th>
-						<th>Datafile<sup>3</sup></th>
-						<th>Printed Guide</th>
-						<th>Datafile<sup>3</sup></th>
-						<th>Printed Guide</th>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/20data.zip">2020 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><div align="center">NA</div></td>
-						<td><div align="center">NA</div></td>
-						<td><div align="center">NA</div></td>
-						<td><div align="center">NA</div></td>
-						<td><div align="center">NA</div></td>
-                    </tr>
-					<tr>
-						<td><a href="epadata/19data.zip">2019 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2019.pdf">2019 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="EPAGreenGuide/xls/all_alpha_19.xlsx">2019 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_19.txt">(TXT)</a></td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_19.pdf">2019 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List for MY 2019.xlsx">2019 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List for MY 2019.pdf">2019 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/18data.zip">2018 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2018.pdf">2018 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="EPAGreenGuide/xls/all_alpha_18.xlsx">2018 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_18.txt">(TXT)</a></td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_18.pdf">2018 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List for MY 2018.xlsx">2018 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List for MY 2018.pdf">2018 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/17data.zip">2017 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2017.pdf">2017 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="EPAGreenGuide/xls/all_alpha_17.xlsx">2017 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_17.txt">(TXT)</a></td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_17.pdf">2017 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List for MY 2017.xlsx">2017 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List for MY 2017.pdf">2017 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/16data.zip">2016 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2016.pdf">2016 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="EPAGreenGuide/xls/all_alpha_16.xlsx">2016 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_16.txt">(TXT)</a></td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_16.pdf">2016 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List for MY 2016.xlsx">2016 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List for MY 2016.pdf">2016 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/15data.zip">2015 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2015.pdf">2015 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_15.xlsx">2015 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_15.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_15.pdf">2015 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List for MY 2015.xlsx">2015 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List for MY 2015.pdf">2015 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/14data.zip">2014 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2014.pdf">2014 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_14.xlsx">2014 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_14.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_14.pdf">2014 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List for MY 2014.xlsx">2014 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List for MY 2014.pdf">2014 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/13data.zip">2013 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2013.pdf">2013 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_13.xlsx">2013 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_13.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_13.pdf">2013 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List for MY 2013.xlsx">2013 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List for MY 2013.pdf">2013 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/12data.zip">2012 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2012.pdf">2012 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_12.xlsx">2012 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_12.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_12.pdf">2012 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List for MY 2012.xlsx">2012 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List for MY 2012.pdf">2012 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/11data.zip">2011 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2011.pdf">2011 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_11.xlsx">2011 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_11.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_11.pdf">2011 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List for MY 2011.xlsx">2011 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List for MY 2011.pdf">2011 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/10data.zip">2010 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2010.pdf">2010 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_10.xls">2010 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_10.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_10.pdf">2010 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List MY 2010.xls">2010 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List MY 2010.pdf">2010 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/09data.zip">2009 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2009.pdf">2009 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_09.xls">2009 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_09.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_09.pdf">2009 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List MY 2009.xls">2009 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List MY 2009.pdf">2009 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/08data.zip">2008 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2008.pdf">2008 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_08.xls">2008 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_08.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_08.pdf">2008 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List MY 2008.xls">2008 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List MY 2008.pdf">2008 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr>
-						<td><a href="epadata/07data.zip">2007 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2007.pdf">2007 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_07.xls">2007 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_07.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_07.pdf">2007 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List MY 2007.xls">2007 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List MY 2007.pdf">2007 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/06data.zip">2006 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2006.pdf">2006 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_06.xls">2006 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_06.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_06.pdf">2006 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List MY 2006.xls">2006 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List MY 2006.pdf">2006 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/05data.zip">2005 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2005.pdf">2005 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_05.xls">2005 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_05.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_05.pdf">2005 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List MY 2005.xls">2005 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List MY 2005.pdf">2005 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/04data.zip">2004 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2004.pdf">2004 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_04.xls">2004 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_04.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_04.pdf">2004 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List MY 2004.xls">2004 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List MY 2004.pdf">2004 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/03data.zip">2003 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2003.pdf">2003 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_03.xls">2003 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_03.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_03.pdf">2003 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List MY 2003.xls">2003 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List MY 2003.pdf">2003 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/02data.zip">2002 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2002.pdf">2002 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_02.xls">2002 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_02.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_02.pdf">2002 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List MY 2002.xls">2002 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List MY 2002.pdf">2002 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/01data.zip">2001 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="pdfs/guides/FEG2001.pdf">2001 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a>
-						<br>
-						<a href="pdfs/guides/2001volume.PDF">Interior Volumes<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_01.xls">2001 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_01.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_01.pdf">2001 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List MY 2001.xls">2001 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List MY 2001.pdf">2001 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/00data.zip">2000 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td>
-							<a href="pdfs/guides/FEG2000.pdf">2000 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a>
-							<br>
-							<a href="pdfs/guides/volume.pdf">Interior Volumes<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a>
-						</td>
-						<td>
-							<a href="EPAGreenGuide/xls/all_alpha_00.xls">2000 Guide<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a> /
-							<a href="EPAGreenGuide/txt/all_alpha_00.txt">(TXT)</a>
-						</td>
-						<td><a href="EPAGreenGuide/pdf/all_alpha_00.pdf">2000 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/xls/SmartWay Vehicle List MY 2000.xls">2000 Data<img src="/feg/images/icons/icon_excel.gif" alt="Excel Icon" class="icon"></a></td>
-						<td><a href="/feg/EPAGreenGuide/Smartway/pdf/SmartWay Vehicle List MY 2000.pdf">2000 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/99guide.zip">1999 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/99feg.pdf">1999 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/98guide6.zip">1998 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/98feg.pdf">1998 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/97mfgui.zip">1997 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/97feg.pdf">1997 Guide<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/96mfgui.zip">1996 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/96guide.txt">1996 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/95mfgui.zip">1995 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/95guide.txt">1995 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/94mfgui.zip">1994 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/94guide.txt">1994 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/93mfgui.zip">1993 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/93guide.txt">1993 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/92mfgui.zip">1992 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/92guide.txt">1992 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/91mfgui.zip">1991 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/91guide.txt">1991 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/90mfgui.zip">1990 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/90guide.txt">1990 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/89mfgui.zip">1989 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/89guide.txt">1989 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/88mfgui.zip">1988 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/88guide.txt">1988 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/87mfgui.zip">1987 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/87guide.txt">1987 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/86mfgui.zip">1986 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/86guide.txt">1986 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/85mfgui.zip">1985 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/85guide.txt">1985 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/84mfgui.zip">1984 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/84guide.txt">1984 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/83data.zip">1983 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/83guide.txt">1983 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/82data.zip">1982 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/82guide.txt">1982 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/81data.zip">1981 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/81guide.txt">1981 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/80data.zip">1980 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/80guide.txt">1980 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/79data.zip">1979 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/79guide.txt">1979 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td><a href="epadata/78data.zip">1978 Datafile<img src="/feg/images/icons/icon_zip.gif" alt="Zip File Icon" class="icon"></a></td>
-						<td><a href="epadata/78guide.txt">1978 Guide (TXT)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td></td>
-						<td><a href="pdfs/guides/FEG1977.pdf">1977 Guide (PDF)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td></td>
-						<td><a href="pdfs/guides/FEG1976.pdf">1976 Guide (PDF)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td></td>
-						<td><a href="pdfs/guides/FEG1975.pdf">1975 Guide (PDF)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    <tr> 
-						<td></td>
-						<td><a href="pdfs/guides/FEG1974.pdf">1974 Guide (PDF)</a></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-                    </tr>
-                    
-                    
-                  </table>
-				  
-				  <p class="table-note"><sup>1</sup>Data files have been <a href="http://windows.microsoft.com/en-us/windows/compress-uncompress-files-zip-files#1TC=windows-7">compressed</a> into *.zip files, which must be downloaded to your computer/device and unzipped before they can be used. The data files are formatted as comma-separated value files (*.csv) for import into database or spreadsheet tables (<a href="epadata/Readme.txt">documentation</a>). The 1998 and 1999 data are also available as  Excel spreadsheets&#8212;included in their respective *.zip files.</p>
-				  <p class="table-note"><sup>2</sup>Annual fuel costs shown in 1997-2014 Fuel Economy Guides are based on fuel prices when the guide was originally printed. Annual fuel cost estimates based on current prices are available in <a href="findacar.shtml">Find and Compare Cars</a>  </p>
-				  <p class="table-note"><sup>3</sup><a href="EPAGreenGuide/GreenVehicleGuideDocumentation.pdf">EPA Green Vehicle Guide and SmartWay List Documentation<img src="/feg/images/icons/icon_pdf.gif" alt="Adobe Acrobat Icon" class="icon"></a></p>	
-			</div><!-- end of #main-content -->		
+    Second Character -- Number of forward speeds
+         V -- Fully variable gear ratios
 
-		</div><!-- end of .row -->
+    Third Character -- (optional, Guide only)
+         C -- Creeper
 
-		<div id="ft" role="contentinfo">
-	<nav>
-		<span class="visible-xs" style="display: inline">
-			  <a href="//www.fueleconomy.gov/m/">Mobile</a>
-			| <a href="//www.fueleconomy.gov/feg/esIndex.shtml">Espa&ntilde;ol</a>
-			| <a href="//www.fueleconomy.gov/feg/sitemap.shtml">Site Map</a>
-			| <a href="//www.fueleconomy.gov/feg/links.shtml"><span class="sr-only">General </span>Links</a>
-			| <a href="//www.fueleconomy.gov/feg/info.shtml">FAQ</a>
-			| <a href="//www.fueleconomy.gov/feg/contacts.shtml">Contacts</a>
-			| <a href="//www.usa.gov">USA.gov</a>
-			| <a href="//www.fueleconomy.gov/feg/ORNL-disclaimer.htm">Privacy/Security</a>
-			| <a href="mailto:fueleconomy@ornl.gov">Feedback</a>
-		</span>
-		<span class="hidden-xs" style="display: inline">
-			  <a href="//www.fueleconomy.gov/feg/contacts.shtml">Contacts</a>
-			| <a href="//www.fueleconomy.gov/feg/download.shtml">Download&nbsp;EPA's&nbsp;MPG Ratings</a> 
-			| <a href="//www.fueleconomy.gov/feg/bymake/bymanuNF.shtml">Find&nbsp;and&nbsp;Compare&nbsp;Cars</a>
-			| <a href="//www.usa.gov">USA.gov</a>
-			| <a href="//www.fueleconomy.gov/feg/dealers.shtml">Info&nbsp;for&nbsp;Auto&nbsp;Dealers</a>
-			| <a href="//www.fueleconomy.gov/feg/ORNL-disclaimer.htm">Privacy/Security</a>
-			| <a href="mailto:fueleconomy@ornl.gov">Feedback</a>
-		</span>
-	</nav>
-</div><!-- end of #ft -->
+Drive System (Guide and Test Car List)    FWD -- Front-wheel drive
+                                          RWD -- Rear-wheel drive
+                                          4WD -- Four-wheel drive
 
-<!--Sponsor row-->
-<div class="row sponsor-foot visible-xs">
 
-	<div class="col-xs-7">
-		<a href="//www.eere.energy.gov" target="_parent"><img class="img-responsive" src="/feg/images/home/eere_logo_horiz_gray.png" alt="U.S. Department of Energy - Energy Efficiency and Renewable Energy" style="max-height: 24px"></a>
-	</div>
-	<div class="col-xs-5">
-		<a href="//www.epa.gov/otaq/" target="_parent"><img class="img-responsive pull-right" src="/feg/images/home/epa_logo_gray.png" alt="U.S. Environmental Protection Agency - Office of Transportation and Air Quality" style="max-height: 24px"></a>
-	</div>
 
-</div><!-- End of Sponsor row -->
-<div style="height: 2.5em"></div>
 
-	</div><!-- end of main-container -->
+Transmission Description (Guide and Test Car List)
 
-	<!-- Core Script for FE.gov -->
+    EMS         -- Engine management system
+    SIL         -- Shift indicator light on instrument panel
+    CLKUP       -- Computer-controlled continuously variable lockup
+    VLKUP       -- Continuously variable, user-selectable lockup
+    nLKUP       -- User-selectable lockup with n (2 through 9) lockup ranges
+    CMODE       -- Computer controlled multimode transmission
+    VMODE       -- User-selectable continuously variable transmission
+    nMODE       -- Multimode, user-selectable transmission**
+                           n = number of gear ranges (2 through 9)
+    DC/FW or FW -- Declutching and freewheeling
 
-<!-- Base script for jQuery -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+** An automatic transmission that has an operator-selectable feature that 
+changes
+   transmission parameters such as gear ratios or automatic transmission shift
+   speed calibrations; e.g.: transmissions with "power" and "economy" modes.
 
-<!-- Base script for Bootstrap -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+Fuel System (Guide and Test Car List)
 
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.min.js"></script>
-<![endif]-->
+    FI   -- Fuel injection
+    1    -- 1-barrel carburetor
+    2    -- 2-barrel carburetor
+    3    -- 3-barrel carburetor
+    4    -- 4-barrel carburetor
 
-<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+Fuel Type (Guide)
 
-<script src="/feg/assets/FitVids.js/jquery.fitvids.js"></script>
+    P    -- Premium unleaded gasoline
+    R    -- Regular unleaded gasolineŒ    D    -- Diesel fuel
+    C    á á Compressed natural gas
+    E    á á Ethanol
 
-<!-- Search.  -->
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script src="/feg/assets/js/search/jquery.search.js"></script>
+Control System (Test Car List)
 
-<script type="text/javascript">
-	$(document).ready(
-			// Configure the validator globally.
-			function() {
-				jQuery.validator.setDefaults({
-					errorPlacement : function(error, element) {
-						// if the input has a prepend or append element, put the validation msg after the parent div
-						if (element.parent().hasClass('input-prepend')
-								|| element.parent().hasClass('input-append')) {
-							error.insertAfter(element.parent());
-						} else {
-							// else just place the validation message immediately after the input
-							error.insertAfter(element);
-						}
-					},
-					highlight : function(element) {
-						$(element).closest('.control-group').addClass('error');
-					},
-					unhighlight : function(element) {
-						$(element).closest('.control-group').removeClass('error');
-					}
-				});
-			});
-</script>
+    AIR         -- Air Injection
+    EM          -- Engine Modification
+    FI          -- Fuel Injection
+    THM         -- Thermal Reactor
+    CAT         -- Catalyst
+    TUR,       -- Turbocharger
+    EGR         -- Exhaust Gas Recycle
+    NON         -- None
+    PMP         -- Air Pump
+    PLS,        -- Pulsating Air System
+    OXD,      -- Oxidation Catalyst
+    RED         -- Reduction Catalyst
+    3WY        - Three-way Catalyst
+    CLS         -- Closed Loop
+    3CL         -- Three-way Catalyst + Closed Loop
+    CAI         -- Closed Loop Air Injection
+    OTR         -- Other
 
-<!-- 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=fueleconomy#async=1"></script>
-<script type="text/javascript">
-	// Intialize AddThis
-	$(window).load(function initAddThis() {
-		addthis.init();
-	})
-</script>
--->
 
-<script type="text/javascript">
-	// Highlights current page on side nav based on URL path and name 
-    $(document).ready(function () {
-		// Setup search autocomplete.
-		$('#search-text').setup_autocomplete();
+      ===================================================
 
-		// Activates (shades dark gray) subnav item that matches file name & path
-        $('a[href="' + this.location.pathname + '"]').parent().addClass('active');
 
-		// Automotically sizes videos using FitVids plug-in
-		$('.video').fitVids();
+Database Formats
+----------------
 
-		// Initializes dropdowns 
-		$('.dropdown-toggle').dropdown();
+There are different formats for these database files depending on
+the model year.  Following are the database formats for:
 
-		// Activates tooltips
-		$('.tool-tip').tooltip();
+1998 and later
+1985-1997
+1984,
+1978-1983
 
-		// Activates popovers
-		$('.pop-over').popover();
 
-		// Buttons for state gas prices
-		$('#go-state-btn').on('click', function () {
-			var stateSelection = $('#state').val();
-			if (stateSelection != "None") {
-				newPage="/feg/gasprices/states/"+stateSelection+".shtml";
-				window.location = newPage;
-			}
-		});
+   =================================================================
 
-		// Give search textbox focus on dropdown.
-		$('#searchDdParent').on('shown.bs.dropdown', function () {
-			setTimeout(function() {
-				$('#search-text').focus();
-			}, 10);
-		});
-	});
-</script>
+Database formats for 1998 and later Fuel Economy Guide Database files.
+The comma-delimited format files are named ??GUIDE6.CSV and the Excel spreadsheet 
+format files are named ??GUIDE6.XLSŒclass     - vehicle class name
+manufacturer  -  manufacturer or division name
+carline name   - model name
+displ    - displacement in liters
+cyl       - number of engine cylinders
+trans    - transmission type
+drv      - drive axle type:
+       F - front wheel drive
+       R - rear wheel drive
+       4  - 4-wheel or all-wheel drive
+cty       - estimated city mpg (miles/gallon)
+hwy     - estimated highway mpg (miles/gallon)
+cmb     - estimated combined mpg (miles/gallon)
+ucty     - unadjusted city mpg
+uhwy   -unadjusted highway mpg
+ucmb   - unadjusted combined mpg
+fl         - fuel type:
+      R - regular grade gasoline (octane number of 87)
+      P - premium grade gasoline (octane number  of 92 or 93)
+      D - diesel fuel
+     C - compressed natural gas
+     E - ethanol (E85 - 85% ethanol, 15% gas
+     El  - electricity 
+G         - the model is a gas guzzler if this column has a 'G'
+T          - the model is equipped with turbocharger if this column has a 'T'
+S          - the model is equipped with supercharger if this column has an 'S'
+2pv      - passenger interior volume of  a 2-door version
+2lv       - luggage interior volume of a 2-door version
+4pv      - passenger interior volume of a 4-door version
+4lv       - luggage interior volume of a 4-door version
+hpv      - passenger interior volume of a hatchback version
+hlv       - luggage interior volume of a hatchback version
+fcost    - annual fuel cost based on estimated combined mpg
+eng dscr - an engine related descriptor to identify a model from another similar model
+trans dscr - a transmission related descriptor to identify a model from another similar model
+vpc       © valves per cylinder (for 2000 or later only)
+cls         © vehicle class code(1=2©seater, 2=minicompact, etc) (for 2000 or later only)
 
-<!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-587e8f71196bf1c3"></script>
+Passenger/luggage interior volume is shown for available body types only.
 
-</body>
-</html>
+Interior volume dimensions are not required for Two Seater passenger cars or any vehicle
+classified as truck which includes vans, pickups, special purpose vehicles, minivan and sport
+utility vehicles.
+
+         =================================================================ŒDatabase format for 1985-1997 Fuel Economy Guide Database files.
+The ZIP'd versions of these files are named ??MFGUI.ZIP, e.g., 93MFGUI.ZIP.
+
+:
+1***********************************                                                                    
+*************************
+ * ENVIRONMENTAL PROTECTION AGENCY *                                                                    
+* DATE RUN:OCT  7, 1987 *
+ * MOTOR VEHICLE EMISSIONS LAB     *                                                                     *
+TIME RUN:09:50:16     *
+ * ANN ARBOR, MICHIGAN             *                                                                     * PAGE
+NUMBER:   1      *
+ ***********************************                                                                    
+*************************
+0                                                     DATA FILE DEFINITION
+                                                     **********************
+                                                     *                    *
+                                                     * MFGUI85 - MFGUI93  *
+                                                     *                    *
+                                                     **********************
+0                                                                 FILE DESCRIPTION
+
+******************************************************************************
+**************************************************
+**
+                                                                * Fuel Economy Guide data bases for 1985-1993 model
+year
+
+******************************************************************************
+**************************************************
+**
+0 RECORD  FIELD       FIELD     STARTING               #DEC.
+    ID    NUMBER       NAME      COLUMN   WIDTH  TYPE  PLACES  COMMENTS
+0*****************************************************************************
+**************************************************
+***
+     1       1     ACTIVE YEAR       1       4    I      0     ACTIVE YEAR
+     1       2     STATE CODE        5       1    A      0     STATE CODE:  F=49-STATE,
+C=CALIFORNIA
+     1       3     CARLINE CLSS      6       2    I      0     CARLINE CLASS CODE
+     1       4     CARLINE MFR CODE  8       3    I      0     CARLINE MANUFACTURER CODE
+     1       5     CARLINE NAME     11      28    A      0     CARLINE NAME
+     1       6     DISP CUB IN      39       4    I      0     DISP CUBIC INCHES
+     1       7     FUEL SYSTEM      43       2    A      0     FUEL SYSTEM: 'FI' FOR FUEL
+INJECTION, 2-DIGIT INTEGER VALUEŒ                                                                            FOR #OF VENTURIES IF CARBURETOR
+SYSTEM.
+     1       8     MODEL TRANS      45       6    A      0     TRANSMISSION TYPE
+     1       9     NO CYC           51       2    I      0     NUMBER OF ENGINE CYLINDERS
+     1      10     DATE   TIME      53      12    A      0     DATE AND TIME RECORD ENTERED -
+YYMMDDHHMMSS (YEAR, MONTH, DAY,
+                                                                                              HOUR, MINUTE, SECOND)
+     1      11     RELEASE DATE     65       6    A      0     RELEASE DATE - YYMMDD (YEAR,
+MONTH, DAY)
+     1      12     VI MFR CODE      71       3    I      0     VI MANUFACTURER CODE
+     1      13     CARLINE CODE     74       5    I      0     CARLINE CODE
+     1      14     BASIC ENG ID     79       5    I      0     BASIC ENGINE INDEX
+     1      15     CARLINE MFR NAME 84      32    A      0     CARLINE MANUFACTURER
+NAME
+     1      16     SUPPRESS CODE   116       1    I      0     SUPPRESSION CODE (NO
+SUPPRESSED RECORD IF FOR PUBLIC ACCESS)
+     1      17     EST CITY MPG    117       3    I      0     ESTIMATED (CITY) MILES PER
+GALLON - 90% OF UNADJUSTED VALUE
+     1      18     HIGHWAY MPG     122       3    I      0     ESTIMATED (HWY) MILES PER
+GALLON - 78% OF UNADJUSTED VALUE
+     1      19     COMBINED MPG    127       3    I      0     COMBINED MILES PER GALLON
+     1      20     UNADJ CITY MPG  132       3    I      0     UNADJUSTED  CITY MILES PER
+GALLON
+     1      21     UNADJ HWY MPG   137       3    I      0     UNADJUSTED HIGHWAY MILES
+PER GALLON
+     1      22     UNADJ COMB MPG  142       3    I      0     UNADJUSTED COMBINED MILES
+PER GALLON
+     1      23     AVE ANL FUEL    147       6    I      0     "$" in col 147, Annual Fuel Cost starting
+col 148 in I5
+     1      24     OPT DISP        153       8    A      0     OPTIONAL DISPLACEMENT
+     1      26     ENGINE DESC1    161      10    A      0     ENGINE DESCRIPTION 1
+     1      27     ENGINE DESC2    171      10    A      0     ENGINE DESCRIPTION 2
+     1      28     ENGINE DESC3    181      10    A      0     ENGINE DESCRIPTION 3
+     1      29     BODY TYPE 2D    191      10    A      0     BODY TYPE 2 DOOR - IF THE BODY
+TYPE APPLIES IT WILL TAKE THE
+                                                               FORM '2DR-PPP/LL' WHERE PPP=PASSENGER
+INTERIOR VOLUME AND
+                                                               LL=LUGGAGE INTERIOR VOLUME.
+     1      30     BODY TYPE 4D    201      10    A      0     BODY TYPE 4 DOOR - IF THE BODY
+TYPE APPLIES IT WILL TAKE THE
+                                                               FORM '4DR-PPP/LL' WHERE PPP=PASSENGER
+INTERIOR VOLUME AND
+                                                               LL=LUGGAGE INTERIOR VOLUME.
+     1      31     BODY TYPE HBK   211      10    A      0     BODY TYPE HBK    - IF THE BODY
+TYPE APPLIES IT WILL TAKE THEŒ                                                               FORM 'HBK-PPP/LL' WHERE PPP=PASSENGER
+INTERIOR VOLUME AND
+                                                               LL=LUGGAGE INTERIOR VOLUME.
+     1      32     PUERTO RICO     221       1    A      0     '*' IF FOR PUERTO RICO SALES
+ONLY
+     1      33     OVERDRIVE       222       4    A      0     OVERDRIVE:  ' OD ' FOR
+OVERDRIVE, 'EOD ' FOR ELECTRICALLY OPERATED
+                                                               OVERDRIVE AND 'AEOD' FOR AUTOMATIC
+OVERDRIVE
+     1      34     DRIVE SYSTEM    226       3    A      0     FWD=FRONT WHEEL DRIVE, 
+RWD=REAR,  4WD=4-WHEEL
+     1      35     FILLER          229       1    A      0     NOT USED
+     1      36     FUEL TYPE       230       1    A      0     R=REGULAR(UNLEADED), 
+P=PREMIUM,  D=DIESEL
+     1      37     TRANS DESC      231      15    A      0     TRANSMISSION DESCRIPTORS
+
+   =================================================================
+
+
+Database format for 1984 Fuel Economy Guide Database file.
+The ZIP'd versions of this file is named 84MFGUI.ZIP.
+
+:
+1***********************************                                                                    
+*************************
+ * ENVIRONMENTAL PROTECTION AGENCY *                                                                    
+* DATE RUN:OCT  7, 1987 *
+ * MOTOR VEHICLE EMISSIONS LAB     *                                                                     *
+TIME RUN:09:50:16     *
+ * ANN ARBOR, MICHIGAN             *                                                                     * PAGE
+NUMBER:   1      *
+ ***********************************                                                                    
+*************************
+0                                                     DATA FILE DEFINITION
+                                                     **********************
+                                                     *                    *
+                                                     *      MFGUI84       *
+                                                     *                    *
+                                                     **********************
+0                                                                 FILE DESCRIPTION
+
+******************************************************************************
+**************************************************
+**
+                                                                * Fuel Economy Guide data base for 1984 model yearŒ******************************************************************************
+**************************************************
+**
+0 RECORD  FIELD       FIELD     STARTING               #DEC.
+    ID    NUMBER       NAME      COLUMN   WIDTH  TYPE  PLACES  COMMENTS
+0*****************************************************************************
+**************************************************
+***
+     1       1     ACTIVE YEAR       1       4    I      0     ACTIVE YEAR
+     1       2     STATE CODE        5       1    A      0     STATE CODE:  F=49-STATE,
+C=CALIFORNIA
+     1       3     CARLINE CLSS      6       2    I      0     CARLINE CLASS CODE
+     1       4     CARLINE MFR       8       3    I      0     CARLINE MANUFACTURER CODE
+     1       5     CARLINE NAME     11      28    A      0     CARLINE NAME
+     1       6     DISP CUB IN      39       4    I      0     DISP CUBIC INCHES
+     1       7     FUEL SYSTEM      43       2    A      0     FUEL SYSTEM: 'FI' FOR FUEL
+INJECTION, 2-DIGIT INTEGER VALUE
+                                                                            FOR #OF VENTURIES IF CARBURETOR
+SYSTEM.
+     1       8     MODEL TRANS      45       6    A      0     TRANSMISSION TYPE
+     1       9     NO CYC           51       2    I      0     NUMBER OF ENGINE CYLINDERS
+     1      10     DATE   TIME      53      12    A      0     DATE AND TIME RECORD ENTERED -
+YYMMDDHHMMSS (YEAR, MONTH, DAY,
+                                                                                              HOUR, MINUTE, SECOND)
+     1      11     RELEASE DATE     65       6    A      0     RELEASE DATE - YYMMDD (YEAR,
+MONTH, DAY)
+     1      12     VI MFR CODE      71       3    I      0     VI MANUFACTURER CODE
+     1      13     FILLER           74       5    H      0     NOT USED
+     1      14     BASIC ENG ID     79       5    I      0     BASIC ENGINE INDEX
+     1      15     CARLINE MFR NAME 84      32    A      0     CARLINE MANUFACTURER
+NAME
+     1      16     SUPPRESS CODE   116       1    I      0     SUPPRESSION CODE (NO
+SUPPRESSED RECORD IF FOR PUBLIC ACCESS)
+     1      17     FILLER          117      15    H      0     NOT USED
+     1      18     EST CITY MPG    132       3    I      0     ESTIMATED (CITY) MILES PER
+GALLON
+     1      19     HIGHWAY MPG     137       3    I      0     HIGHWAY MILES PER GALLON
+     1      20     COMBINED MPG    142       3    I      0     COMBINED MILES PER GALLON
+     1      21     AVE ANL FUEL    147       6    A      0     "$" in col 147, Annual Fuel Cost starting
+col 148, in I5
+     1      22     OPT DISP        153       8    A      0     OPTIONAL DISPLACEMENT
+     1      23     ENGINE DESC1    161      10    A      0     ENGINE DESCRIPTION 1
+     1      24     ENGINE DESC2    171      10    A      0     ENGINE DESCRIPTION 2
+     1      25     FILLER          181      10    H      0     NOT USED
+     1      26     BODY TYPE 2D    191      10    A      0     BODY TYPE 2 DOOR - IF THE BODYŒTYPE APPLIES IT WILL TAKE THE
+                                                               FORM '2DR-PPP/LL' WHERE PPP=PASSENGER
+INTERIOR VOLUME AND
+                                                               LL=LUGGAGE INTERIOR VOLUME.
+     1      27     BODY TYPE 4D    201      10    A      0     BODY TYPE 4 DOOR - IF THE BODY
+TYPE APPLIES IT WILL TAKE THE
+                                                               FORM '4DR-PPP/LL' WHERE PPP=PASSENGER
+INTERIOR VOLUME AND
+                                                               LL=LUGGAGE INTERIOR VOLUME.
+     1      28     BODY TYPE HBK   211      10    A      0     BODY TYPE HBK    - IF THE BODY
+TYPE APPLIES IT WILL TAKE THE
+                                                               FORM 'HBK-PPP/LL' WHERE PPP=PASSENGER
+INTERIOR VOLUME AND
+                                                               LL=LUGGAGE INTERIOR VOLUME.
+     1      28     PUERTO RICO     221       1    A      0     '*' IF FOR PUERTO RICO SALES
+ONLY
+     1      29     OVERDRIVE       222       4    A      0     '(OD)' IF ELECTRICALLY OPERATED
+OVERDRIVE
+
+   =================================================================
+
+
+Database format for 1978-1983 Fuel Economy Guide Database files.
+The ZIP'd versions of these files are named ??DATA.ZIP, e.g., 83DATA.ZIP.
+
+:
+1***********************************                                                                    
+*************************
+ * ENVIRONMENTAL PROTECTION AGENCY *                                                                    
+* DATE RUN:OCT  7, 1987 *
+ * MOTOR VEHICLE EMISSIONS LAB     *                                                                     *
+TIME RUN:09:50:16     *
+ * ANN ARBOR, MICHIGAN             *                                                                     * PAGE
+NUMBER:   1      *
+ ***********************************                                                                    
+*************************
+0                                                     DATA FILE DEFINITION
+                                                     ************************
+                                                     *                      *
+                                                     *  78CG.DAT, 78FG.DAT  *
+                                                     *        ...           *
+                                                     *  83CG.DAT, 83FG.DAT  *
+                                                     ************************
+0                                                                 FILE DESCRIPTION
+Œ******************************************************************************
+**************************************************
+**
+                                                                * FILE PURPOSE:  FUEL ECONOMY GUIDE DATA
+BASES for 1978 TO 1983
+                                                                * RESTRICTED INFORMATION IS THE
+                                                                * SALES WHICH ARE NEVER MADE PUBLIC
+INFORMATION.
+ COMMENT  #1  -  MODEL  LEVEL  TRANSMISSION  CODE  IS  DETERMINED  BY 
+MODTRS(FIELD#  15)  AND MODTRN(FIELD #21): MODEL
+LEVEL
+ TRANSMISSION IS M3/M4C IF MODTRS=M3 &MODTRN=C, M4C IF MODTRS=C4 &
+MODTRN=C, M4X2 IF MODTRS=D4 AND IT IS THE SAME 
+AS  MODTRS
+ FOR  OTHER CASES EXCEPT THAT IF THE O-D-CODE(FIELD #17) IS 3, (OD) IS
+APPENDED TO MODTRS.
+
+******************************************************************************
+**************************************************
+**
+0 RECORD  FIELD       FIELD     STARTING               #DEC.
+    ID    NUMBER       NAME      COLUMN   WIDTH  TYPE  PLACES  COMMENTS
+0*****************************************************************************
+**************************************************
+***
+     1       1     SUPPRESS          1       1    I      0     NUMERIC CODE FOR REASON FOR
+SUPPRESSION: NO SUPPRESSED RECORD
+                                                               IF FOR PUBLIC ACCESS
+     1       2     ALT-LOW           2       1    I      0     LOW ALTITUDE APPLICATION: 0 OR
+BLANK- NO,  1 - YES
+     1       3     ALT-HIGH          3       1    I      0     HIGH ALTITUDE APPLICATION: 0 OR
+BLANK - NO,  1 - YES
+     1       4     ALT-BOTH          4       1    I      0     LOW & HIGH ALTITUDE APPLICATION: 
+0 OR BLANK - NO,  1 - YES
+     1       6     BAS-ENG-INDX      6       5    I      0     5 DIGIT NUMBER IDENTIFYING A
+GROUP INFO FOR A BASIC ENGINE
+     1       7     CARLINE-CODE     11       5    I      0     CARLINE CODE--5 DIGIT CODE
+ASSIGNED TO A CARLINE. THE FIRST
+                                                               3 DIGITS REPRESENT A CARLINE
+MANUFACTURER (PARTICULAR MANUFACTURER
+                                                               OR DIVISION WITHIN A CORPORATE ENTITY).
+AND THE LAST TWO DIGITS
+                                                               REPRESENT AN ARBITRARY NUMBER ASSIGNED
+TO A CARLINE.  INFORMATION
+                                                               RELATING TO A CARLINE CODE CAN BEŒOBTAINED FROM CARLINE DATA FILE.
+     1       8     FILLER           16       3    H      0     NOT USED
+     1       9     CARLINE-CLAS     19       2    I      0     CARLINE CLASS CODE
+REPRESENTING TWO-SEATER, COMPACT, MID-SIZE, ETC.,
+     1      10     CITY-MPG         21       3    I      0     ESTIMATED (CITY) MPG OF THIS
+MODEL TYPE (ROUNDED)
+     1      11     HWY-MPG          24       3    I      0     HIGHWAY MPG OF THIS MODEL TYPE
+(ROUNDED)
+     1      12     COMB-MPG         27       3    I      0     COMBINED MPG OF THIS MODEL
+TYPE (ROUNDED)
+     1      13     FUEL-COST        30       6    I      0     ANNUAL FUEL COST BASED ON 15,000
+MILES OF DRIVING PER YEAR
+     1      14     DISP-CID         36       4    I      0     ENGINE DISPLACEMENT IN CUBIC
+INCHES
+     1      15     MODTRS           40       2    A      0     2-CHARACTER TRANSMISSION CODE -
+SEE DATA FILE DESCRIPTION COMMENT #1
+     1      16     FILLER           42       1    H      0     A HYPHEN I.E., -
+     1      17     O-D-CODE         43       1    I      0     1=NO GEAR RATIO < 1, 2=TOP GEAR
+RATO < 1, 3=ELECTRICALLY OPERATED OD
+                                                               WHEN FUEL ECONOMY GUIDE REPORT IS
+GENERATED).
+     1      18     NO-CYL           44       2    I      0     NUMBER OF CYLINDERS
+     1      19     FILLER           46       2    H      0     NOT USED
+     1      20     FUEL-SYS         48       2    A      0     FUEL SYSTEM - 'FI' IF FUEL INJECTION,
+# OF VETURIES FOR CARBURETORS
+     1      21     MODTRN           50       1    A      0     1-CHARACTER TRANSMISSION CODE -
+SEE DATA FILE DESCRIPTION COMMENT #1
+     1      22     CATALYST         51       1    A      0     CATALYST APPLICATION : Y FOR
+YES AND N FOR NO
+     1      23     CITY-MPG-F       52       8    F      4     UNROUNDED MPG FOR CITY
+DRIVING
+     1      24     HWY-MPG-F        60       8    F      4     UNROUNDED MPG FOR HIGHWAY
+DRIVING
+     1      25     COMB-MPG-F       68       8    F      4     UNROUNDED MPG FOR CITY/HWY
+COMBINED HARMONICALLY AVERAGED & WEIGHTED
+     1      26     OPT-DISP         76       8    A      0     OPTIONAL DISPLACEMENT - BLANK,
+(XXXXCC) OR (XX.XL)
+     1      27     SALES-MTOT       84       6    I      0     SALES FOR MODEL LEVEL FUEL
+ECONOMY CALCULATION
+                                                               ERASED/BLANKED IF FOR PUBLIC ACCESS
+     1      28     FUEL             90       2    I      0     FUEL TYPE: 6 & 7=UNLEADED GASOLINE, 
+1 & 17=LEADED GASOLINE,
+                                                                              9=DIESEL
+     1      29     FILLER           92       3    H      0     NOT USED
+     1      30     SALES-MTOTC      95       6    I      0     MODEL SALES EXCLUDING THOSEŒWITH SUPPRESSION CODE 2 OR 9
+                                                               ERASED/BLANKED IF FOR PUBLIC ACCESS
+     1      31     FILLER          101      15    H      0     NOT USED
+     1      32     CARLINE-NAME    116      28    A      0     CARLINE NAME DECODED FROM
+5 DIGIT CARLINE CODE
+     1      33     FILLER          144       4    H      0     NOT USED
+     1      34     ENG-DSRPTR-1    148      10    A      0     BASIC ENGINE DESCRIPTOR 1
+FROM CARD 1 INPUT
+     1      35     ENG-DSRPTR-2    158      10    A      0     BASIC ENGINE DESCRIPTOR 2
+FROM CARD 1 INPUT
+
+
+[end]
